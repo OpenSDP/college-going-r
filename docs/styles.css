@@ -1,0 +1,26 @@
+.affix {
+   position: static;
+ }
+ @media (min-width: 992px) {
+    #toc.affix {
+		top: inherit;
+		width: inherit;
+		position: fixed;
+    }
+}
+#toc {
+	width: 100%;
+	text-align: left;
+	max-height: 100%;
+	overflow-y: scroll;
+}
+#logo{
+	 background-color: #C4112F;
+}
+body { 
+	padding-top: 115px; 
+	overflow: visible;
+}
+html {
+	overflow: visible;
+}
