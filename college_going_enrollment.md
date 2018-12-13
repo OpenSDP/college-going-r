@@ -19,17 +19,7 @@ output:
 # College Enrollment
 
 ## Getting Started
-```{r knitrSetup, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE, comment=NA}
-# Set options for knitr
-library(knitr)
-knitr::opts_chunk$set(comment=NA, warning=FALSE, echo=TRUE,
-                      root.dir = normalizePath("../"),
-                      error=FALSE, message=FALSE, fig.align='center',
-                      fig.width=8, fig.height=6, dpi = 144, 
-                      fig.path = "../figure/D_", 
-                      cache.path = "../cache/D_")
-options(width=80)
-```
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
@@ -74,7 +64,8 @@ analysis file using data from your own school system.
 
 This guide takes advantage of the OpenSDP synthetic dataset. 
 
-```{r}
+
+```r
 library(tidyverse) # main suite of R packages to ease data analysis
 library(magrittr) # allows for some easier pipelines of data
 library(tidyr) #
@@ -88,15 +79,7 @@ pkgTest("devtools")
 pkgTest("OpenSDPsynthR")
 ```
 
-```{r, cache=TRUE, message=FALSE, echo=FALSE}
-# Set the cache to true when using knitr to speed up future analyses
-simouts <- simpop(nstu = 40000, seed = 8763434, 
-                  control = sim_control(nschls = 12L, minyear = 1997,
-                                        n_postsec = 50L,
-                                        n_cohorts = 4,
-                                        maxyear = 2017)) 
-cgdata <- sdp_cleaner(simouts)
-```
+
 
 ### About the Analyses
 
@@ -121,7 +104,8 @@ sample restrictions at the beginning of your do file so they will feed into the 
 your code.
 
 
-```{r setSampleRestrictions}
+
+```r
 # Read in global variables for sample restriction
 # Agency name
 agency_name <- "Agency"
@@ -210,7 +194,8 @@ for school administrators (top enrolling institutions of the school’s graduate
 
 **Analytic Technique:** Calculate the proportion of students who enroll in college by high school.
 
-```{r D1filterAndSort}
+
+```r
 # // Step 2: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin & 
@@ -218,7 +203,8 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
 ```
 
 
-```{r D1reshapeAndRecode}
+
+```r
 # // Step 3: Obtain the agency-level and school averages for seamless enrollment
 
 chartData <- 
@@ -251,7 +237,8 @@ chartData$outcome[chartData$outcome == "enrl_1oct_grad_yr1_4yr"] <-
   "4-yr Seamless Enroller"
 ```
 
-```{r D1plot}
+
+```r
 # Make the figure caption
 figureCaption <- paste0("Sample: ", chrt_grad_begin -1, "-", chrt_grad_begin, 
                         " through ", chrt_grad_end -1, "-", chrt_grad_end, 
@@ -279,6 +266,8 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
   theme(axis.text.x = element_text(angle = 30, vjust = 0.8, color = "black"), 
         legend.position = c(0.15, 0.8), axis.ticks.x = element_blank())
 ```
+
+<img src="../figure/D_D1plot-1.png" title="plot of chunk D1plot" alt="plot of chunk D1plot" style="display: block; margin: auto;" />
 
 ### Seamless and Delayed College Enrollment Rates by High School
 
@@ -329,7 +318,8 @@ for school administrators (top enrolling institutions of the school’s graduate
 four-year institutions across high schools according to the selectivity ranking 
 of the postsecondary institutions attended.
 
-```{r D2filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 
@@ -338,10 +328,10 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
   select(sid, chrt_grad, enrl_1oct_grad_yr1_2yr, enrl_1oct_grad_yr1_4yr,
          enrl_1oct_grad_yr1_any, enrl_ever_w2_grad_2yr, enrl_ever_w2_grad_any,
          enrl_ever_w2_grad_4yr, hs_diploma, last_hs_code, last_hs_name)
-
 ```
 
-```{r D2reshapeAndRecode}
+
+```r
 # // Step 2: Create binary outcomes for late enrollers
 plotdf$late_any <- ifelse(plotdf$enrl_1oct_grad_yr1_any == 0 & 
                             plotdf$enrl_ever_w2_grad_any == 1, 1, 0)
@@ -384,10 +374,10 @@ chartData$outcome[chartData$outcome == "enrl_1oct_grad_yr1_2yr"] <- "2-yr Seamle
 chartData$outcome[chartData$outcome == "enrl_1oct_grad_yr1_4yr"] <- "4-yr Seamless"
 chartData$outcome[chartData$outcome == "late_2yr"] <- "2-yr Delayed"
 chartData$outcome[chartData$outcome == "late_4yr"] <- "4-yr Delayed"
-
 ```
 
-```{r D2Plot}
+
+```r
 # // Step 7: Plot
 ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any), 
                       y = measure/hs_diploma, 
@@ -408,8 +398,9 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
        caption = figureCaption) + 
   theme(axis.text.x = element_text(angle = 30, vjust = 0.8, color = "black"), 
         legend.position = c(0.1, 0.8), axis.ticks.x = element_blank())
-
 ```
+
+<img src="../figure/D_D2Plot-1.png" title="plot of chunk D2Plot" alt="plot of chunk D2Plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by Average 8th Grade Achievement
 
@@ -454,7 +445,8 @@ student bodies report similar matriculation rates to college.
 **Analytic Technique:** Bivariate scatterplot of school-level average student 
 test scores and college enrollment rates.
 
-```{r D3FilterAndSort}
+
+```r
 # // Step 2: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation AND have non-missing eighth 
 # grade math scores
@@ -464,10 +456,10 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
   select(sid, chrt_grad, enrl_1oct_grad_yr1_any, test_math_8_std,
          last_hs_name) %>% 
   filter(!is.na(test_math_8_std))
-
 ```
 
-```{r D3reshapeAndCalculate}
+
+```r
 # // Step 2: Obtain agency-level college enrollment rate and prior 
 # achievement score for dotted lines. Also get position of their labels
 
@@ -488,8 +480,8 @@ chartData$last_hs_name <- gsub(" ", "\n", chartData$last_hs_name)
 ```
 
 
-```{r D3plot}
 
+```r
 # // Step 5: Plot
 ggplot(chartData, aes(x = math_test, y = enroll_rate)) + 
   geom_point() + geom_text(aes(label = last_hs_name), 
@@ -526,9 +518,9 @@ ggplot(chartData, aes(x = math_test, y = enroll_rate)) +
        subtitle = "Seamless Enrollers", 
        caption = figureCaption) + 
   theme(axis.text = element_text(color="black", size = 12))
-
-
 ```
+
+<img src="../figure/D_D3plot-1.png" title="plot of chunk D3plot" alt="plot of chunk D3plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartiles
 
@@ -581,7 +573,8 @@ student bodies may report similar matriculation rates to college.
 college by October 1st following their high school graduation year by high 
 school and 8th grade test score quartile.
 
-```{r D4filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation AND have non-missing eighth 
 # grade math scores
@@ -593,7 +586,8 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
   filter(!is.na(qrt_8_math))
 ```
 
-```{r D4reshapeAndCalculate}
+
+```r
 # // Step 2: Obtain the overall agency-level high school graduation rate for 
 # dotted line along with the position of its label
 AGENCYLEVEL <- plotdf %>% 
@@ -625,7 +619,8 @@ figureCaption <- paste0("Sample: ", chrt_grad_begin -1, "-", chrt_grad_begin,
                         "\n All other data from administrative records.")
 ```
 
-```{r D4plot}
+
+```r
 # // Step 7: Make plot for first panel with legend and labels
 
 p1 <- ggplot(chartData[chartData$qrt_8_math == 1, ], 
@@ -692,6 +687,8 @@ grid.arrange(grobs=wrap, nrow=1,
                x = unit(0.99, "npc")))
 ```
 
+<img src="../figure/D_D4plot-1.png" title="plot of chunk D4plot" alt="plot of chunk D4plot" style="display: block; margin: auto;" />
+
 ### Rates of College Enrollment by College Type Among Highly Qualified Graduates
 
 **Purpose:** Research consistently finds wide variation in rates of persistence 
@@ -754,7 +751,8 @@ who do not enroll in college, enroll in 2-year college, and enroll in least
 competitive and unranked 4-year colleges the fall following high school 
 graduation.
 
-```{r D5filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 
@@ -769,7 +767,8 @@ plotdf$race_ethnicity <- as.character(plotdf$race_ethnicity)
 totalCount <- nrow(plotdf)
 ```
 
-```{r D5recodeAndReshape}
+
+```r
 # // Step 3: Create "undermatch" outcomes
 plotdf$no_college <- ifelse(plotdf$enrl_1oct_grad_yr1_any == 0, 1, 0)
 plotdf$enrl_2yr <- ifelse(plotdf$enrl_1oct_grad_yr1_2yr == 1, 1, 0)
@@ -825,10 +824,10 @@ chartData$outcomeLabel <- factor(chartData$outcomeLabel,
                                  levels = c("Enrolled at 4-Yr College", 
                                             "Not Enrolled in College", 
                                             "Enrolled at 2-Yr College"))
-
 ```
 
-```{r D5plot}
+
+```r
 #// Step 10: Create a caption to put under the figure
 n_aa <- nrow(plotdf[plotdf$race_ethnicity == "Black",])
 n_a <- nrow(plotdf[plotdf$race_ethnicity == "Asian",])
@@ -867,8 +866,9 @@ ggplot(chartData, aes(x = reorder(label, total_count), y = measure,
        title = "Rates of Highly Qualified Students Attending College, by Race", 
        subtitle = "Among Graduates Eligible to Attend Four-Year Universities", 
        caption = figureCaption)
-
 ```
+
+<img src="../figure/D_D5plot-1.png" title="plot of chunk D5plot" alt="plot of chunk D5plot" style="display: block; margin: auto;" />
 
 ### Gaps in Rates of College Enrollment Between Latino and White Graduates
 
@@ -920,7 +920,8 @@ graduates who enrolled in college—in raw terms and after accounting for 8th
 grade test scores, for eligibility for Free or Reduced Price Lunch (FRPL), 
 and for both of these characteristics. 
 
-```{r D6filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation AND have non-missing eighth 
 # grade test scores AND non-missing FRPL status
@@ -941,7 +942,8 @@ plotdf$race_ethnicity <- relevel(plotdf$race_ethnicity, ref = "White")
 plotdf$cluster_var <- paste(plotdf$chrt_grad, plotdf$last_hs_code, sep = "-")
 ```
 
-```{r D6modelAndReshape}
+
+```r
 # Load the broom library to make working with model coefficients simple 
 # and uniform
 library(broom)
@@ -998,7 +1000,8 @@ rm(plotdf, betas_unadj, betas_adj_frpl, betas_adj_frpl_prior,
    betas_adj_prior_ach)
 ```
 
-```{r D6plot}
+
+```r
 # Make the figure caption
 figureCaption <- paste0("Sample: ", chrt_grad_begin -1, "-", chrt_grad_begin, 
                         " through ", chrt_grad_end -1, "-", chrt_grad_end, 
@@ -1021,8 +1024,9 @@ ggplot(chartData[chartData$term == "race_ethnicityHispanic", ],
                       " \nBetween Latino and White High School Graduates"), 
        x = "",
        caption = figureCaption)
-
 ```
+
+<img src="../figure/D_D6plot-1.png" title="plot of chunk D6plot" alt="plot of chunk D6plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartile Bubbles
 
@@ -1067,7 +1071,8 @@ grade test scores in the bottom quartile?
 score quartile at each high school who enroll in college seamlessly after high 
 school graduation.
 
-```{r D7filterAndSOrt}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation AND have non-missing eighth 
 # grade test scores
@@ -1080,7 +1085,8 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
 ```
 
 
-```{r D7reshapeAndCalculate}
+
+```r
 # // Step 2: Create agency- and school-level average outcomes for each quartile
 
 chartData <- plotdf %>% group_by(last_hs_name, qrt_8_math) %>% 
@@ -1094,7 +1100,8 @@ agencyData <- plotdf %>% group_by(qrt_8_math) %>%
   mutate(pct_enrl = enroll_count/diploma_count) %>% as.data.frame
 ```
 
-```{r D7plot}
+
+```r
 # // Step 3: Plot
 
 ggplot(chartData, aes(x = factor(qrt_8_math), y = pct_enrl)) + 
@@ -1112,6 +1119,8 @@ ggplot(chartData, aes(x = factor(qrt_8_math), y = pct_enrl)) +
        subtitle = "Within Quartile of Prior Achievement, by High School", 
         caption = figureCaption)
 ```
+
+<img src="../figure/D_D7plot-1.png" title="plot of chunk D7plot" alt="plot of chunk D7plot" style="display: block; margin: auto;" />
 
 ### Undermatch Rates Among Highly Qualified High School Graduates
 
@@ -1176,7 +1185,8 @@ highest rates in each quartile?
 - Are across-school differences in colleges enrollment rates particularly large 
 for students of certain achievement profile—for example, for students with 8th grade test scores in the bottom quartile?
 
-```{r D8filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation AND are highy qualified
 
@@ -1189,7 +1199,8 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
   filter(highly_qualified ==1 )
 ```
 
-```{r D8recodeAndReshape}
+
+```r
 # // Step 4. Create the undermatch outcomes
 # This script assumes that there are 5 levels of selectivity, as in 
 # Barron’s College Rankings—Most Competitive (1), Highly Competitive (2), 
@@ -1213,10 +1224,10 @@ chartData <- plotdf %>% group_by(outcome) %>%
 
 chartData %<>% filter(outcome != "Match") %>% 
   arrange(count)
-
 ```
 
-```{r D8plot}
+
+```r
 # // Step 6: Plot
 
 ggplot(arrange(chartData, -count), 
@@ -1234,7 +1245,8 @@ ggplot(arrange(chartData, -count),
        subtitle = "Among Highly Qualified High School Graduates",
        x = "",
        caption = figureCaption)
-
 ```
+
+<img src="../figure/D_D8plot-1.png" title="plot of chunk D8plot" alt="plot of chunk D8plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

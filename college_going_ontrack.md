@@ -22,17 +22,7 @@ output:
 
 ## Getting Started
 
-```{r knitrSetup, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE, comment=NA}
-# Set options for knitr
-library(knitr)
-knitr::opts_chunk$set(comment=NA, warning=FALSE, echo=TRUE,
-                      root.dir = normalizePath("../"),
-                      error=FALSE, message=FALSE, fig.align='center',
-                      fig.width=8, fig.height=6, dpi = 144, 
-                      fig.path = "../figure/B_", 
-                      cache.path = "../cache/B_")
-options(width=80)
-```
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
@@ -77,7 +67,8 @@ analysis file using data from your own school system.
 
 This guide takes advantage of the OpenSDP synthetic dataset. 
 
-```{r}
+
+```r
 library(tidyverse) # main suite of R packages to ease data analysis
 library(magrittr) # allows for some easier pipelines of data
 library(tidyr) #
@@ -91,15 +82,7 @@ pkgTest("devtools")
 pkgTest("OpenSDPsynthR")
 ```
 
-```{r, cache=TRUE, message=FALSE, echo=FALSE}
-# Set the cache to true when using knitr to speed up future analyses
-simouts <- simpop(nstu = 40000, seed = 8763434, 
-                  control = sim_control(nschls = 12L, minyear=1996,
-                                        n_postsec = 50L,
-                                        n_cohorts = 3,
-                                        maxyear=2017)) 
-cgdata <- sdp_cleaner(simouts)
-```
+
 
 ### About the Analyses
 
@@ -122,7 +105,8 @@ sample restrictions at the beginning of your do file so they will feed into the 
 your code.
 
 
-```{r setSampleRestrictions}
+
+```r
 # Read in global variables for sample restriction
 # Agency name
 agency_name <- "Agency"
@@ -206,7 +190,8 @@ grade academic achievement).
 school, and across the agency.
 
 
-```{r B1filterAndSort}
+
+```r
 # Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school on time AND are part of the ontrack sample (attended the first 
 # semester of ninth grade and never transferred into or out of the system)
@@ -235,10 +220,10 @@ plotdf$ot[plotdf$ontrack_endyr1 == 1 & plotdf$cum_gpa_yr1 < 3 &
             !is.na(plotdf$cum_gpa_yr1)] <- "On-Track to Graduate, GPA < 3.0"
 plotdf$ot[plotdf$ontrack_endyr1 == 1 & plotdf$cum_gpa_yr1 >= 3 &
             !is.na(plotdf$cum_gpa_yr1)] <- "On-Track to Graduate, GPA >= 3.0"
-
 ```
 
-```{r B1reshape}
+
+```r
 # Step 4: Obtain the agency average for the key variables
 # and obtain mean rates for each school and append the agency average
 
@@ -268,7 +253,8 @@ figureCaption <- paste0("Sample: ", chrt_ninth_begin_grad -1, "-", chrt_ninth_be
 ```
 
 
-```{r B1plot}
+
+```r
 # Step 6: Plot
 ggplot(progressBars, aes(x = reorder(first_hs_name, n/count), 
                          y = n/count, group = ot)) + 
@@ -285,8 +271,9 @@ ggplot(progressBars, aes(x = reorder(first_hs_name, n/count),
   labs(title = "Proportion of Students On-Track to Graduate by School", 
        subtitle = "End of Ninth Grade On-Track Status \n By High School", x = "",
        caption = figureCaption)
-
 ```
+
+<img src="../figure/B_B1plot-1.png" title="plot of chunk B1plot" alt="plot of chunk B1plot" style="display: block; margin: auto;" />
 
 ### Ninth To Tenth Grade Transition by On-Track Status
 
@@ -324,7 +311,8 @@ understand which students struggle, why they struggle, and interventions to keep
 them enrolled and engaged.
 
 
-```{r B2filterAndSort}
+
+```r
 # Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school on time AND are part of the ontrack sample (attended the first 
 # semester of ninth grade and never transferred into or out of the system)
@@ -368,7 +356,8 @@ plotdf$ot_10[plotdf$status_after_yr2 == 3 | plotdf$status_after_yr2 == 4] <-
   "Dropout/Disappear"
 ```
 
-```{r B2reshapeAndFormat}
+
+```r
 # Step 5: Obtain mean rates for each school and append the agency average
 onTrackBar <- plotdf %>% group_by(ot, ot_10) %>% 
   select(ot) %>% tally() %>% 
@@ -385,11 +374,11 @@ onTrackBar$n[onTrackBar$ot_10 == "Off-Track to Graduate"] <-
   -onTrackBar$n[onTrackBar$ot_10 == "Off-Track to Graduate"] 
 onTrackBar$n[onTrackBar$ot_10 == "Dropout/Disappear"] <- 
   -onTrackBar$n[onTrackBar$ot_10 == "Dropout/Disappear"] 
-
 ```
 
 
-```{r B2plot}
+
+```r
 ggplot(onTrackBar, aes(x = reorder(ot, n/count), 
                          y = n/count, group = ot_10)) + 
   geom_bar(aes(fill = ot_10), stat = 'identity', color = I("black")) + 
@@ -407,5 +396,7 @@ ggplot(onTrackBar, aes(x = reorder(ot, n/count),
        subtitle = "End of Ninth Grade On-Track Status \n By High School", 
        caption = figureCaption)
 ```
+
+<img src="../figure/B_B2plot-1.png" title="plot of chunk B2plot" alt="plot of chunk B2plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

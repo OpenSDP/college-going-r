@@ -22,17 +22,7 @@ output:
 
 ## Getting Started
 
-```{r knitrSetup, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE, comment=NA}
-# Set options for knitr
-library(knitr)
-knitr::opts_chunk$set(comment=NA, warning=FALSE, echo=TRUE,
-                      root.dir = normalizePath("../"),
-                      error=FALSE, message=FALSE, fig.align='center',
-                      fig.width=8, fig.height=6, dpi = 144, 
-                      fig.path = "../figure/C_", 
-                      cache.path = "../cache/C_")
-options(width=80)
-```
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
@@ -77,7 +67,8 @@ analysis file using data from your own school system.
 
 This guide takes advantage of the OpenSDP synthetic dataset. 
 
-```{r}
+
+```r
 library(tidyverse) # main suite of R packages to ease data analysis
 library(magrittr) # allows for some easier pipelines of data
 library(tidyr) #
@@ -91,14 +82,7 @@ pkgTest("devtools")
 pkgTest("OpenSDPsynthR")
 ```
 
-```{r, cache=TRUE, message=FALSE, echo=FALSE, warning=FALSE}
-simouts <- simpop(nstu = 40000, seed = 8763434, 
-                  control = sim_control(nschls = 12L, minyear=1996,
-                                        n_postsec = 50L,
-                                        n_cohorts = 3,
-                                        maxyear=2017)) 
-cgdata <- sdp_cleaner(simouts)
-```
+
 
 ### About the Analyses
 
@@ -121,7 +105,8 @@ sample restrictions at the beginning of your do file so they will feed into the 
 your code.
 
 
-```{r setSampleRestrictions}
+
+```r
 # Read in global variables for sample restriction
 # Agency name
 agency_name <- "Agency"
@@ -199,18 +184,18 @@ why?
 school by school.
 
 
-```{r C1filterandSort}
 
+```r
 # // Step 1: Keep students in ninth grade cohorts you can observe 
 #  graduating high school one year late
 
 plotdf <- filter(cgdata, chrt_ninth >= chrt_ninth_begin_grad_late & 
                    chrt_ninth <= chrt_ninth_end_grad_late) 
-
 ```
 
 
-```{r C1ReshapeCalculate}
+
+```r
 # // Step 2: Obtain agency level high school and school level graduation 
 #  rates
 
@@ -244,7 +229,8 @@ figureCaption <- paste0("Sample: ", chrt_ninth_begin_grad_late -1, "-",
 ```
 
 
-```{r C1plot}
+
+```r
 #  // Step 5: Plot
 ggplot(schoolLevel, aes(x = reorder(first_hs_name, measure), y = measure, 
                         group = first_hs_name, fill = outcome)) + 
@@ -262,6 +248,8 @@ ggplot(schoolLevel, aes(x = reorder(first_hs_name, measure), y = measure,
        x = "",
        caption = figureCaption)
 ```
+
+<img src="../figure/C_C1plot-1.png" title="plot of chunk C1plot" alt="plot of chunk C1plot" style="display: block; margin: auto;" />
 
 ### High School Completion Rates by Average 8th Grade Achievement
 
@@ -307,19 +295,19 @@ other information predictive of student achievement in high school) in place of
 **Analytic Technique:** Bivariate scatterplot of school-level average student 
 test scores and high school completion rates.
 
-```{r C2filterandSort}
 
+```r
 # // Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school AND have non-missing eighth grade math scores
 
 plotdf <- filter(cgdata, chrt_ninth >= chrt_ninth_begin_grad & 
                    chrt_ninth <= chrt_ninth_end_grad) %>% 
   filter(!is.na(test_math_8_std))
-
 ```
 
 
-```{r C2reshapeandCalculate}
+
+```r
 # // Step 2: Obtain agency and school level completion and prior achievement 
 #  rates
 
@@ -346,7 +334,8 @@ figureCaption <- paste0("Sample: ", chrt_ninth_begin_grad_late -1, "-",
                         "Data from ", agency_name, " administrative records.")
 ```
 
-```{r C2plot}
+
+```r
 # // Step 4: Plot
 ggplot(schoolLevel[schoolLevel$first_hs_name != "Agency AVERAGE", ], 
        aes(x = std_score, y = ontime_grad)) + 
@@ -387,6 +376,8 @@ ggplot(schoolLevel[schoolLevel$first_hs_name != "Agency AVERAGE", ],
        subtitle = "By Student Achievement Profile Upon High School Entry",
        caption = figureCaption)
 ```
+
+<img src="../figure/C_C2plot-1.png" title="plot of chunk C2plot" alt="plot of chunk C2plot" style="display: block; margin: auto;" />
 
 ### High School Completion Rates by 8th Grade Achievement Quartiles
 
@@ -432,17 +423,18 @@ less likely to graduate.
 complete high school and an 8th grade test score quartile for each. 
 
 
-```{r C3filterAndSort}
+
+```r
 # // Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school AND have non-missing eighth grade math scores
 
 plotdf <- filter(cgdata, chrt_ninth >= chrt_ninth_begin_grad & 
                    chrt_ninth <= chrt_ninth_end_grad) %>% 
   filter(!is.na(test_math_8_std))
-
 ```
 
-```{r C3reshapeAndRecode}
+
+```r
 # // Step 2: btain the agency-level and school level high school graduation 
 # rates by test score quartile
 
@@ -459,10 +451,10 @@ schoolLevel <- bind_rows(
 
 # // Step 3: Recode HS Name for display
 schoolLevel$first_hs_name <- gsub(" High School", "", schoolLevel$first_hs_name)
-
 ```
 
-```{r C3plot}
+
+```r
 # //  Step 4: Create plot template
 #  Load library for arranging multiple plots into one
 library(gridExtra); library(grid)
@@ -535,8 +527,9 @@ grid.arrange(grobs=wrap, nrow=1,
     bottom = textGrob(
       label = figureCaption, 
       gp=gpar(fontsize=10,lineheight=1), just = 1, x = unit(0.99, "npc")))
-
 ```
+
+<img src="../figure/C_C3plot-1.png" title="plot of chunk C3plot" alt="plot of chunk C3plot" style="display: block; margin: auto;" />
 
 ### Racial Gaps in Completion Overall and by 8th Grade Achievement Quartiles
 
@@ -581,7 +574,8 @@ socioeconomic status.
 school by race/ethnicity overall, and by race/ethnicity and 8th grade test 
 score quartile.
 
-```{r C4filterandSort}
+
+```r
 # // Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school AND have non-missing eighth grade math scores
 
@@ -593,7 +587,8 @@ plotdf$race <- as.factor(plotdf$race_ethnicity)
 ```
 
 
-```{r C4reshapeRecode}
+
+```r
 # // Step 2: Obtain average on-time completion by race for agency
 plotOne <- plotdf %>% group_by(race) %>% 
   summarize(ontimeGrad = mean(ontime_grad, na.rm = TRUE), 
@@ -622,7 +617,8 @@ plotTwo$qrt_label <- factor(plotTwo$qrt_label,
                                        "Top Quartile"))
 ```
 
-```{r C4plot}
+
+```r
 # // Step 5: Plot
 ggplot(plotOne, aes( x= reorder(race, -N), y = ontimeGrad, fill = race)) + 
   geom_bar(stat = "identity", color = I("black")) + 
@@ -636,7 +632,11 @@ ggplot(plotOne, aes( x= reorder(race, -N), y = ontimeGrad, fill = race)) +
   labs(x = "", title = "On-Time High School Graduation Rates",
        subtitle = "by Race and Eigth Grade Math Quartile", 
        caption = figureCaption)
+```
 
+<img src="../figure/C_C4plot-1.png" title="plot of chunk C4plot" alt="plot of chunk C4plot" style="display: block; margin: auto;" />
+
+```r
 ggplot(plotTwo, aes( x = qrt_label, 
                      group= reorder(race, -N), y = ontimeGrad, fill = race)) + 
   geom_bar(stat = "identity", color = I("black"), position = "dodge") + 
@@ -651,9 +651,9 @@ ggplot(plotTwo, aes( x = qrt_label,
   labs(x = "", title = "On-Time High School Graduation Rates",
        subtitle = "by Race and Eigth Grade Math Quartile", 
        caption = figureCaption)
-
-  
 ```
+
+<img src="../figure/C_C4plot-2.png" title="plot of chunk C4plot" alt="plot of chunk C4plot" style="display: block; margin: auto;" />
 
 ### Enrollment Outcome in Year Four By On-Track Status At the End of Ninth Grade
 
@@ -694,7 +694,8 @@ socioeconomic status.
 school within four years, dropout, remain enrolled in high school for a fifth 
 year, etc. based on on-track status upon completion of ninth grade.
 
-```{r C5filterandsort}
+
+```r
 # // Step 1: Keep students in ninth grade cohorts you can observe graduating 
 # high school AND have non-missing eighth grade math scores AND are part of 
 # the on-track sample
@@ -716,7 +717,8 @@ plotdf$ontrackStatus[plotdf$ontrack_endyr1 == 1 & plotdf$cum_gpa_yr1 >= 3 &
                        !is.na(plotdf$cum_gpa_yr1)] <- "On-Track, GPA >= 3.0"
 ```
 
-```{r C5reshape}
+
+```r
 # // Step 4: Create average outcomes by on-track status at the end of ninth grade
 plotOne <- plotdf %>% group_by(ontrackStatus, statusVar) %>% 
   summarize(count = n()) %>% ungroup %>%
@@ -742,7 +744,8 @@ figureCaption <- paste0("Sample: ", chrt_ninth_begin_grad_late -1, "-",
                         "All data from ", agency_name, " administrative records.")
 ```
 
-```{r C5plot}
+
+```r
 ggplot(plotOne, aes(x = ontrackStatus, y = count/sum, fill = statusVar, 
                     group = statusVar)) + 
   geom_bar(stat="identity") + 
@@ -758,5 +761,7 @@ ggplot(plotOne, aes(x = ontrackStatus, y = count/sum, fill = statusVar,
   theme_classic() + theme(legend.position = c(0.8, 0.8),
                           axis.text = element_text(color = "black")) 
 ```
+
+<img src="../figure/C_C5plot-1.png" title="plot of chunk C5plot" alt="plot of chunk C5plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

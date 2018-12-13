@@ -23,17 +23,7 @@ output:
 
 ## Getting Started 
 
-```{r knitrSetup, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE, comment=NA}
-# Set options for knitr
-library(knitr)
-knitr::opts_chunk$set(comment=NA, warning=FALSE, echo=TRUE,
-                      root.dir = normalizePath("../"),
-                      error=FALSE, message=FALSE, fig.align='center',
-                      fig.width=8, fig.height=6, dpi = 144, 
-                      fig.path = "../figure/A_", 
-                      cache.path = "../cache/A_")
-options(width=80)
-```
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
@@ -76,7 +66,8 @@ analysis file using data from your own school system.
 
 This guide takes advantage of the OpenSDP synthetic dataset. 
 
-```{r}
+
+```r
 library(tidyverse) # main suite of R packages to ease data analysis
 library(magrittr) # allows for some easier pipelines of data
 library(tidyr) #
@@ -90,15 +81,7 @@ pkgTest("devtools")
 pkgTest("OpenSDPsynthR")
 ```
 
-```{r, cache=TRUE, message=FALSE, echo=FALSE}
-# Set the cache to true when using knitr to speed up future analyses
-simouts <- simpop(nstu = 40000, seed = 8763434, 
-                  control = sim_control(nschls = 12L, minyear=1996,
-                                        n_postsec = 50L,
-                                        n_cohorts = 3,
-                                        maxyear=2017)) 
-cgdata <- sdp_cleaner(simouts)
-```
+
 
 
 ### About the Analyses
@@ -130,7 +113,8 @@ sample restrictions at the beginning of your do file so they will feed into the 
 your code.
 
 
-```{r setSampleRestrictions}
+
+```r
 # Read in global variables for sample restriction
 # Agency name
 agency_name <- "Agency"
@@ -209,7 +193,8 @@ available reports? What might account for differences?
 progress to each step along the education pipeline.
 
 
-```{r A1filterCalculate}
+
+```r
 # Step 1: Keep students in ninth grade cohorts you can observe persisting to the 
 # second year of college
 
@@ -261,7 +246,8 @@ schoolData <- bind_rows(schoolData, agencyData,
 rm(agencyData, minSchool, maxSchool)
 ```
 
-```{r A1tidydata}
+
+```r
 # Step 6: Prepare to graph the results
 schoolData$cohort <- 1
 schoolData <- schoolData %>% gather(key = outcome, 
@@ -281,11 +267,11 @@ figureCaption <- paste0("Sample: ", chrt_ninth_begin_persist_yr2-1, "-",
                         agency_name, " high school graduates. \n", 
                         "Postsecondary enrollment outcomes from NSC matched records. \n", 
                         "All other data from ", agency_name, " administrative records.")
-
 ```
 
 
-```{r A1graph}
+
+```r
 ## Step 7: Graph the results
 
 ggplot(schoolData[schoolData$subset,], 
@@ -305,9 +291,9 @@ ggplot(schoolData[schoolData$subset,],
        title = "Student Progression from 9th Grade Through College", 
        subtitle = "Agency Average", x = "",
        caption = figureCaption)
-
-
 ```
+
+<img src="../figure/A_A1graph-1.png" title="plot of chunk A1graph" alt="plot of chunk A1graph" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity
 
@@ -340,7 +326,8 @@ racial/ethnic sub-groups.
 **Analytic Technique:** Calculate the proportion of first-time ninth graders 
 that progress to each step along the education pipeline.
 
-```{r A2filterCalculate}
+
+```r
 # Step 1: Keep students in ninth grade cohorts you can observe persisting to 
 ## the second year of college
 
@@ -363,7 +350,8 @@ progressRace <- plotdf %>% group_by(race_ethnicity) %>%
             N = n())
 ```
 
-```{r A2tidyandFormat}
+
+```r
 # Step 4: Reformat the data for plotting
 progressRace$cohort <- 1
 progressRace <- progressRace %>% gather(key = outcome, 
@@ -385,11 +373,11 @@ progressRace$race_ethnicity[progressRace$race_ethnicity == 3] <- "Hispanic"
 progressRace$race_ethnicity[progressRace$race_ethnicity == 4] <- "Native American"
 progressRace$race_ethnicity[progressRace$race_ethnicity == 5] <- "White"
 progressRace$race_ethnicity[progressRace$race_ethnicity == 6] <- "Multiple/Other"
-
 ```
 
 
-```{r A2plot}
+
+```r
 # Step 6: Graph the results
 ggplot(progressRace[progressRace$subset,], 
        aes(x = outcome, y = measure, group = race_ethnicity, 
@@ -407,8 +395,9 @@ ggplot(progressRace[progressRace$subset,],
        title = "Student Progression from 9th Grade Through College", 
        subtitle = "By Student Race/Ethnicity", x = "",
        caption = figureCaption)
-
 ```
+
+<img src="../figure/A_A2plot-1.png" title="plot of chunk A2plot" alt="plot of chunk A2plot" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity, Among FRPL Students
 
@@ -444,7 +433,8 @@ only students whoever qualifying for free or reduced price lunch are examined?
 **Analytic Technique:** Calculate the proportion of first-time ninth graders 
 that progress to each step along the education pipeline.
 
-```{r A3 filterSample}
+
+```r
 ## Step 1: Keep students in ninth grade cohorts you can observe persisting to 
 ## the second year of college AND are ever FRPL-eligible
 
@@ -477,8 +467,8 @@ progressRaceFRL <- plotdf %>% group_by(race_ethnicity) %>%
 progressRaceFRL %<>% filter(N >= 20)
 ```
 
-```{r A3reshapeRecode}
 
+```r
 # Step 6: Prepare to graph the results
 ## Reshape the data 
 progressRaceFRL$cohort <- 1
@@ -506,7 +496,8 @@ progressRaceFRL$race_ethnicity[progressRaceFRL$race_ethnicity == 5] <- "White"
 progressRaceFRL$race_ethnicity[progressRaceFRL$race_ethnicity == 6] <- "Multiple/Other"
 ```
 
-```{r A3plot}
+
+```r
 ggplot(progressRaceFRL[progressRaceFRL$subset,], 
        aes(x = outcome, y = measure, group = race_ethnicity, 
            color = race_ethnicity, linetype = race_ethnicity)) + 
@@ -528,6 +519,8 @@ ggplot(progressRaceFRL[progressRaceFRL$subset,],
        x = "",
        caption = figureCaption)
 ```
+
+<img src="../figure/A_A3plot-1.png" title="plot of chunk A3plot" alt="plot of chunk A3plot" style="display: block; margin: auto;" />
 
 ### Progression by Students' On-Track Status After Ninth Grade
 
@@ -574,8 +567,8 @@ on-track with a lower GPA?
 **Analytic Technique:** Calculate the proportion of first-time ninth graders 
 that progressed along the education pipeline.
 
-```{r A4filterAndSortData}
 
+```r
 #  // Step 1: Keep students in ninth grade cohorts you can observe persisting 
 #  to the second year of college AND are included in the on-track analysis sample
 
@@ -605,11 +598,11 @@ plotdf$ot[plotdf$ontrack_endyr1 == 1 & plotdf$cum_gpa_yr1 < 3 &
             !is.na(plotdf$cum_gpa_yr1)] <- "On-Track to Graduate, GPA < 3.0"
 plotdf$ot[plotdf$ontrack_endyr1 == 1 & plotdf$cum_gpa_yr1 >= 3 & 
             !is.na(plotdf$cum_gpa_yr1)] <- "On-Track to Graduate, GPA >= 3.0"
-
 ```
 
 
-```{r A4reshapeAndFormat}
+
+```r
 #  // Step 4: Calculate aggregates for the Agency by on track status
 
 progressTrack <- plotdf %>% group_by(ot) %>% 
@@ -630,10 +623,10 @@ progressTrack$outcome[progressTrack$outcome == "seamless_transitioners_any"] <-
   "Seamless College Transitioner"
 progressTrack$outcome[progressTrack$outcome == "second_year_persisters"] <- 
   "Second Year Persisters"
-
 ```
 
-```{r A4plot}
+
+```r
 # Annotate for direct labels, find endpoints
 annotation_pos <- c(progressTrack$measure[progressTrack$outcome == "Second Year Persisters" & 
                                         progressTrack$ot == "Off-Track to Graduate"] - 0.25, 
@@ -666,5 +659,7 @@ ggplot(progressTrack,
        subtitle = "By Course Credits and GPA after First High School Year", x = "",
        caption = figureCaption)
 ```
+
+<img src="../figure/A_A4plot-1.png" title="plot of chunk A4plot" alt="plot of chunk A4plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

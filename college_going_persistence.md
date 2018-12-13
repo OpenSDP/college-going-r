@@ -21,17 +21,7 @@ output:
 *R Version*
 
 ## Getting Started
-```{r knitrSetup, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE, comment=NA}
-# Set options for knitr
-library(knitr)
-knitr::opts_chunk$set(comment=NA, warning=FALSE, echo=TRUE,
-                      root.dir = normalizePath("../"),
-                      error=FALSE, message=FALSE, fig.align='center',
-                      fig.width=8, fig.height=6, dpi = 144, 
-                      fig.path = "../figure/E_", 
-                      cache.path = "../cache/E_")
-options(width=80)
-```
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
@@ -75,7 +65,8 @@ analysis file using data from your own school system.
 
 This guide takes advantage of the OpenSDP synthetic dataset. 
 
-```{r}
+
+```r
 library(tidyverse) # main suite of R packages to ease data analysis
 library(magrittr) # allows for some easier pipelines of data
 library(tidyr) #
@@ -89,15 +80,7 @@ pkgTest("devtools")
 pkgTest("OpenSDPsynthR")
 ```
 
-```{r, cache=TRUE, message=FALSE, echo=FALSE}
-# Set the cache to true when using knitr to speed up future analyses
-simouts <- simpop(nstu = 40000, seed = 8763434, 
-                  control = sim_control(nschls = 12L, minyear = 1997,
-                                        n_postsec = 50L,
-                                        n_cohorts = 3,
-                                        maxyear = 2017)) 
-cgdata <- sdp_cleaner(simouts)
-```
+
 
 ### About the Analyses
 
@@ -125,7 +108,8 @@ sample restrictions at the beginning of your do file so they will feed into the 
 your code.
 
 
-```{r setSampleRestrictions}
+
+```r
 # Read in global variables for sample restriction
 # Agency name
 agency_name <- "Agency"
@@ -219,7 +203,8 @@ to explore persistence rates by assignment to remediation coursework.
 second year of college by the high school those students first attended.
 
 
-```{r E1filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 
@@ -236,7 +221,8 @@ plotdf$groupVar[plotdf$enrl_1oct_grad_yr1_2yr == 1] <- "2-year College"
 plotdf$groupVar[plotdf$enrl_1oct_grad_yr1_4yr == 1] <- "4-year College"
 ```
 
-```{r E1ReshapeandRecode}
+
+```r
 # // Step 3: Obtain the agency-level average for persistence and enrollment
 agencyData <- plotdf %>% group_by(groupVar) %>%
   summarize(persistCount = sum(enrl_grad_persist_any, na.rm=TRUE),
@@ -284,7 +270,8 @@ figureCaption <- paste0("Sample: ", chrt_grad_begin-1, "-", chrt_grad_begin,
 ```
 
 
-```{r E1plot}
+
+```r
 # // Step 8: Plot
 ggplot(chartData, aes(x = reorder(last_hs_name, -order), 
                                       group = groupVar, 
@@ -306,8 +293,9 @@ ggplot(chartData, aes(x = reorder(last_hs_name, -order),
        title = "College Persistence by High School, at Any College", 
        subtitle = "Seamless Enrollers by Type of College", 
        caption = figureCaption)
-
 ```
+
+<img src="../figure/E_E1plot-1.png" title="plot of chunk E1plot" alt="plot of chunk E1plot" style="display: block; margin: auto;" />
 
 ### Persistence Across Two-Year and Four-Year Colleges
 
@@ -361,7 +349,8 @@ tuition and room/board, financial aid, etc.).
 persist through four years of college by the postsecondary institution first 
 attended and cumulative high school GPA category.
 
-```{r E2filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 
@@ -371,10 +360,10 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
          enrl_1oct_grad_yr1_any, enrl_1oct_grad_yr2_2yr, enrl_1oct_grad_yr2_4yr,
          enrl_1oct_grad_yr2_any, enrl_grad_persist_any, 
          enrl_grad_persist_2yr, enrl_grad_persist_4yr, last_hs_name) 
-
 ```
 
-```{r E2recodeAndReshape}
+
+```r
 # Clean up missing data for binary recoding
 plotdf$enrl_grad_persist_4yr <- zeroNA(plotdf$enrl_grad_persist_4yr)
 plotdf$enrl_grad_persist_2yr <- zeroNA(plotdf$enrl_grad_persist_2yr)
@@ -439,7 +428,8 @@ chartData$persist_pattern <- factor(as.character(chartData$persist_pattern),
 ```
 
 
-```{r E2plot}
+
+```r
 # // Step 5: Prepare plot for 2-year colleges
 p1 <- ggplot(chartData[chartData$groupVar == "2-year College",], 
        aes(x = reorder(last_hs_name, rankRate), 
@@ -470,8 +460,9 @@ p2 <- p1 %+% chartData[chartData$groupVar == "4-year College",] +
 # // Step 7: Print out plots with labels
 grid.arrange(grobs= list(p2, p1), nrow=1, 
              top = "College Persistence by High School")
-
 ```
+
+<img src="../figure/E_E2plot-1.png" title="plot of chunk E2plot" alt="plot of chunk E2plot" style="display: block; margin: auto;" />
 
 ### Top-Enrolling Colleges/Universities of Agency Graduates
 
@@ -513,7 +504,8 @@ top-enrolling 2- and 4-year institutions, as well as the proportion of seamless
 enrollers who persist to the second year of any college, by the postsecondary
 institution graduates first attended.
 
-```{r E3filterAndSort}
+
+```r
 # // Step 1: Keep students in high school graduation cohorts you can observe 
 # enrolling in college the fall after graduation
 
@@ -527,10 +519,10 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
 
 # // Step 2: Indicate the number of institutions you would like listed
 num_inst <- 5
-
 ```
 
-```{r E3reshapeAndCalculate}
+
+```r
 # // Step 3: Calculate the number and % of students enrolled in each college 
 # the fall after graduation, and the number and % of students persisting, by 
 # college type
@@ -570,10 +562,10 @@ chart2year <- bind_rows(plotdf %>% group_by(first_college_name_2yr) %>%
   mutate(perEnroll = round(100 * enrolled/total_enrolled, 1), 
          perPersist = round(100 * persisted/enrolled, 1))
 )
-  
 ```
 
-```{r E3createTables, results='markup'}
+
+```r
 # // Step 4: Create tables
 chart4year %>% arrange(-enrolled) %>% 
   select(first_college_name_4yr, enrolled, perEnroll, persisted, perPersist) %>%
@@ -581,14 +573,35 @@ chart4year %>% arrange(-enrolled) %>%
     knitr::kable(., col.names = c("Name", "Number Enrolled", 
                          "% Enrolled", "Number Persisted", 
                          "% Persisted"))
+```
 
+
+
+|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
+|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
+|All 4-Year Colleges                 |             233|      100.0|             2269|       973.8|
+|University of South Carolina-Ups... |              51|       21.9|              535|      1049.0|
+|University of Portland              |              47|       20.2|              382|       812.8|
+|Louisiana State University-Alexa... |              29|       12.4|              249|       858.6|
+|Notre Dame College                  |              22|        9.4|              217|       986.4|
+
+```r
 chart2year %>% arrange(-enrolled) %>% 
   select(first_college_name_2yr, enrolled, perEnroll, persisted, perPersist) %>%
   head(num_inst) %>%
   knitr::kable(., col.names = c("Name", "Number Enrolled", 
                          "% Enrolled", "Number Persisted", 
                          "% Persisted"))
-
 ```
+
+
+
+|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
+|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
+|All 2-Year Colleges                 |             631|      100.0|             5831|       924.1|
+|Keiser University-Ft Lauderdale     |             168|       26.6|             1723|      1025.6|
+|Asheville-Buncombe Technical Com... |              91|       14.4|              693|       761.5|
+|Cochise College                     |              55|        8.7|              444|       807.3|
+|Atlanta Metropolitan State College  |              38|        6.0|              343|       902.6|
 
 #### *This guide was originally created by the Strategic Data Project.*

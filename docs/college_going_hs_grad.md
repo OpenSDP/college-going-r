@@ -1,5 +1,20 @@
-Jared Knowles, Lauren Dahlin  
-April 7, 2017  
+---
+name: "OpenSDP College-Going Analyses in R"
+author: "Jared Knowles, Lauren Dahlin"
+date: "April 7, 2017"
+output: 
+  html_document:
+    theme: simplex
+    css: styles.css
+    highlight: NULL
+    keep_md: true
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    includes:
+      in_header: zz-sdp_ga.html
+---
 
 # High School Graduation
 *College-Going Pathways*
@@ -31,10 +46,10 @@ ideas about ways to investigate student pathways through high school and
 college. Each guide includes several analyses in the form of charts together with Stata 
 analysis and graphing code to generate each chart.
 
-Once youâ€™ve identified analyses that you want to try to replicate or modify, click the 
+Once you’ve identified analyses that you want to try to replicate or modify, click the 
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
-you're familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire 
+you're familiar with Github, you can click “Go to Repository” and clone the entire 
 College-Going Pathways repository to your own computer. Go to the Participate page to read 
 about more ways to engage with the OpenSDP community.
 
@@ -647,7 +662,7 @@ ggplot(plotTwo, aes( x = qrt_label,
 predicts high school graduation three years later. Building upon our analysis 
 of the relationship between student performance in ninth and tenth grade, the 
 analysis assesses the utility of using course-level performance data early in 
-studentsâ€™ high school careers to assess risk of non-completion, and target 
+students’ high school careers to assess risk of non-completion, and target 
 students in need of academic and/or socio-emotional support.
 
 
