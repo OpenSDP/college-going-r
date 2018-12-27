@@ -28,7 +28,7 @@ output:
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
 <div class="container">
-<img src="..\img\open_sdp_logo_red.png" style="display: block; margin: 0 auto; height: 115px;">
+<img src="https://opensdp.github.io/assets/images/OpenSDP-Banner_crimson.jpg" style="display: block; margin: 0 auto; height: 115px;">
 </div>
 </div>
 
@@ -49,7 +49,8 @@ Once you’ve identified analyses that you want to try to replicate or modify, c
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
 you're familiar with Github, you can click “Go to Repository” and clone the entire 
-College-Going Pathways repository to your own computer. Go to the [Participate](https://strategicdataproject.github.io/opensdp/participate/) page to read 
+College-Going Pathways repository to your own computer. Go to the 
+[Participate](https://strategicdataproject.github.io/opensdp/participate/) page to read 
 about more ways to engage with the OpenSDP community.
 
 ### About the Data

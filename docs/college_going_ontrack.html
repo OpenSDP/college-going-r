@@ -1555,6 +1555,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -1755,7 +1758,7 @@ div.tocify {
 <div id="using-this-guide" class="section level3">
 <h3>Using this Guide</h3>
 <p>The College-Going Pathways series is a set of guides, code, and sample data about policy-relevant college-going topics. Browse this and other guides in the series for ideas about ways to investigate student pathways through high school and college. Each guide includes several analyses in the form of charts together with Stata analysis and graphing code to generate each chart.</p>
-<p>Once youâ€™ve identified analyses that you want to try to replicate or modify, click the “Download” buttons to download Stata code and sample data. You can make changes to the charts using the code and sample data, or modify the code to work with your own data. If you’re familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire College-Going Pathways repository to your own computer. Go to the Participate page to read about more ways to engage with the OpenSDP community.</p>
+<p>Once you’ve identified analyses that you want to try to replicate or modify, click the “Download” buttons to download Stata code and sample data. You can make changes to the charts using the code and sample data, or modify the code to work with your own data. If you’re familiar with Github, you can click “Go to Repository” and clone the entire College-Going Pathways repository to your own computer. Go to the Participate page to read about more ways to engage with the OpenSDP community.</p>
 </div>
 <div id="about-the-data" class="section level3">
 <h3>About the Data</h3>
@@ -1788,7 +1791,7 @@ pkgTest(&quot;OpenSDPsynthR&quot;)</code></pre>
 # Agency name
 agency_name &lt;- &quot;Agency&quot;
 
-# Ninth grade cohorts you can oâ˜ºbserve persisting to the second year of college
+# Ninth grade cohorts you can o☺bserve persisting to the second year of college
 chrt_ninth_begin_persist_yr2 = 2004
 chrt_ninth_end_persist_yr2 = 2006
 
@@ -1857,7 +1860,7 @@ plotdf$second_year_persisters = as.numeric(plotdf$enrl_1oct_ninth_yr1_any == 1 &
                                              plotdf$enrl_1oct_ninth_yr2_any == 1 &amp;
                                              plotdf$ontime_grad == 1)
 
-# Step 3: Generate on track indicators that take into account studentsâ€™ GPAs 
+# Step 3: Generate on track indicators that take into account students’ GPAs 
 # upon completion of their first year in high school
 
 plotdf$ot &lt;- NA
@@ -1949,7 +1952,7 @@ plotdf$second_year_persisters = as.numeric(plotdf$enrl_1oct_ninth_yr1_any == 1 &
                                              plotdf$enrl_1oct_ninth_yr2_any == 1 &amp;
                                              plotdf$ontime_grad == 1)
 
-# Step 3: Generate on track indicators that take into account studentsâ€™ GPAs 
+# Step 3: Generate on track indicators that take into account students’ GPAs 
 # upon completion of their first year in high school
 
 plotdf$ot &lt;- NA

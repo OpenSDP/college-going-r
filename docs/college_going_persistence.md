@@ -26,7 +26,7 @@ output:
 
 <div class="navbar navbar-default navbar-fixed-top" id="logo">
 <div class="container">
-<img src="..\img\open_sdp_logo_red.png" style="display: block; margin: 0 auto; height: 115px;">
+<img src="https://opensdp.github.io/assets/images/OpenSDP-Banner_crimson.jpg" style="display: block; margin: 0 auto; height: 115px;">
 </div>
 </div>
 
