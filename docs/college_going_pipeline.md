@@ -1,5 +1,20 @@
-Jared Knowles, Lauren Dahlin  
-April 7, 2017  
+---
+name: "Attainment Along the Education Pipeline"
+author: "Jared Knowles, Lauren Dahlin"
+date: "April 7, 2017"
+output: 
+  html_document:
+    theme: simplex
+    css: styles.css
+    highlight: NULL
+    keep_md: true
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    includes:
+      in_header: zz-sdp_ga.html
+---
 
 
 # College-Going Pipeline
@@ -30,10 +45,10 @@ ideas about ways to investigate student pathways through high school and
 college. Each guide includes several analyses in the form of charts together with Stata 
 analysis and graphing code to generate each chart.
 
-Once youâ€™ve identified analyses that you want to try to replicate or modify, click the 
+Once you’ve identified analyses that you want to try to replicate or modify, click the 
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
-you're familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire 
+you're familiar with Github, you can click “Go to Repository” and clone the entire 
 College-Going Pathways repository to your own computer. Go to the [Participate](https://strategicdataproject.github.io/opensdp/participate/) page to read 
 about more ways to engage with the OpenSDP community.
 
@@ -214,7 +229,7 @@ schoolData <- plotdf %>% group_by(first_hs_name) %>%
                                                na.rm=TRUE), 
             second_year_persisters = mean(second_year_persisters, na.rm=TRUE), 
             N = n())
-# 1. Create a variable school_name that takes on the value of studentsâ€™ first 
+# 1. Create a variable school_name that takes on the value of students’ first 
 ## high school attended
 names(schoolData)[1] <- "school_name"
 
@@ -278,7 +293,7 @@ ggplot(schoolData[schoolData$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A1graph-1.png" style="display: block; margin: auto;" />
+<img src="../figure/A_A1graph-1.png" title="plot of chunk A1graph" alt="plot of chunk A1graph" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity
 
@@ -382,7 +397,7 @@ ggplot(progressRace[progressRace$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A2plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/A_A2plot-1.png" title="plot of chunk A2plot" alt="plot of chunk A2plot" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity, Among FRPL Students
 
@@ -505,7 +520,7 @@ ggplot(progressRaceFRL[progressRaceFRL$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A3plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/A_A3plot-1.png" title="plot of chunk A3plot" alt="plot of chunk A3plot" style="display: block; margin: auto;" />
 
 ### Progression by Students' On-Track Status After Ninth Grade
 
@@ -572,7 +587,7 @@ plotdf$second_year_persisters = as.numeric(plotdf$enrl_1oct_ninth_yr1_any == 1 &
                                              plotdf$enrl_1oct_ninth_yr2_any == 1 &
                                              plotdf$ontime_grad == 1)
 
-# // Step 3: Generate on track indicators that take into account studentsâ€™ GPAs 
+# // Step 3: Generate on track indicators that take into account students’ GPAs 
 # upon completion of their first year in high school
 # TODO: Check for NA values in how ontrack_endyr is coded
 plotdf$ot <- NA
@@ -645,6 +660,6 @@ ggplot(progressTrack,
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A4plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/A_A4plot-1.png" title="plot of chunk A4plot" alt="plot of chunk A4plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

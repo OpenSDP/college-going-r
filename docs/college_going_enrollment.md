@@ -1,5 +1,20 @@
-Jared Knowles, Lauren Dahlin  
-April 7, 2017  
+---
+name: "OpenSDP College-Going Analyses in R"
+author: "Jared Knowles, Lauren Dahlin"
+date: "April 7, 2017"
+output: 
+  html_document:
+    theme: simplex
+    css: styles.css
+    highlight: NULL
+    keep_md: true
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    includes:
+      in_header: zz-sdp_ga.html
+---
 
 # College Enrollment
 
@@ -28,10 +43,10 @@ ideas about ways to investigate student pathways through high school and
 college. Each guide includes several analyses in the form of charts together with Stata 
 analysis and graphing code to generate each chart.
 
-Once youâ€™ve identified analyses that you want to try to replicate or modify, click the 
+Once you’ve identified analyses that you want to try to replicate or modify, click the 
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
-you're familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire 
+you're familiar with Github, you can click “Go to Repository” and clone the entire 
 College-Going Pathways repository to your own computer. Go to the Participate page to read 
 about more ways to engage with the OpenSDP community.
 
@@ -69,12 +84,12 @@ pkgTest("OpenSDPsynthR")
 ### About the Analyses
 
 Given the substantial economic and social benefits of a college degree, 
-understanding a high schoolsâ€™ role in preparing students to persist through 
+understanding a high schools’ role in preparing students to persist through 
 college is essential. This section provides a series of analyses that highlight
 college-going rates across high schools in your agency. You will consider 
 whether high school graduates enroll in colleges and universities well-aligned 
 to their  incoming academic qualifications. This is one factor that may increase 
-a studentsâ€™ likelihood of college persistence and degree attainment.
+a students’ likelihood of college persistence and degree attainment.
 
 ### Sample Restrictions
 
@@ -175,7 +190,7 @@ Do certain schools have higher percentages of 2-year or delayed college enroller
 **Possible Next Steps or Action Plans:** Replicate this analysis to include 
 all first-time ninth graders (i.e. ninth grade cohorts) in place of graduates.
 Additionally, create individual high school reports that provide more details 
-for school administrators (top enrolling institutions of the schoolâ€™s graduates).
+for school administrators (top enrolling institutions of the school’s graduates).
 
 **Analytic Technique:** Calculate the proportion of students who enroll in college by high school.
 
@@ -252,7 +267,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
         legend.position = c(0.15, 0.8), axis.ticks.x = element_blank())
 ```
 
-<img src="../figure/D_D1plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D1plot-1.png" title="plot of chunk D1plot" alt="plot of chunk D1plot" style="display: block; margin: auto;" />
 
 ### Seamless and Delayed College Enrollment Rates by High School
 
@@ -297,7 +312,7 @@ college enrollers?
 **Possible Next Steps or Action Plans:** Replicate this analysis to include 
 all first-time ninth graders (i.e. ninth grade cohorts) in place of graduates.
 Additionally, create individual high school reports that provide more details 
-for school administrators (top enrolling institutions of the schoolâ€™s graduates).
+for school administrators (top enrolling institutions of the school’s graduates).
 
 **Analytic Technique:** Calculate the proportion of graduates who enroll in 
 four-year institutions across high schools according to the selectivity ranking 
@@ -385,7 +400,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
         legend.position = c(0.1, 0.8), axis.ticks.x = element_blank())
 ```
 
-<img src="../figure/D_D2Plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D2Plot-1.png" title="plot of chunk D2Plot" alt="plot of chunk D2Plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by Average 8th Grade Achievement
 
@@ -422,7 +437,7 @@ achievement for high schools with similar college enrollment rates?
 first-time ninth graders (i.e. ninth grade cohorts) in place of graduates, 
 and explore college enrollment within two years of high school completion. 
 Additionally, replicate this analysis to explore the relationship between 
-college enrollment and studentsâ€™ ELA achievement at high school entry. Consider 
+college enrollment and students’ ELA achievement at high school entry. Consider 
 why schools with similar incoming student profiles may report dramatically 
 different college-going rates. Conversely, consider why schools with dissimilar 
 student bodies report similar matriculation rates to college.
@@ -505,7 +520,7 @@ ggplot(chartData, aes(x = math_test, y = enroll_rate)) +
   theme(axis.text = element_text(color="black", size = 12))
 ```
 
-<img src="../figure/D_D3plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D3plot-1.png" title="plot of chunk D3plot" alt="plot of chunk D3plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartiles
 
@@ -549,7 +564,7 @@ quartile?
 first-time ninth graders (i.e. ninth grade cohorts) in place of graduates, and 
 explore college enrollment within two years of high school completion. 
 Additionally, replicate this analysis to explore the relationship between 
-college enrollment and studentsâ€™ ELA achievement at high school entry. Consider 
+college enrollment and students’ ELA achievement at high school entry. Consider 
 why schools with similar incoming student profiles may report dramatically 
 different college-going rates. Conversely, consider why schools with distinct 
 student bodies may report similar matriculation rates to college.
@@ -672,7 +687,7 @@ grid.arrange(grobs=wrap, nrow=1,
                x = unit(0.99, "npc")))
 ```
 
-<img src="../figure/D_D4plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D4plot-1.png" title="plot of chunk D4plot" alt="plot of chunk D4plot" style="display: block; margin: auto;" />
 
 ### Rates of College Enrollment by College Type Among Highly Qualified Graduates
 
@@ -724,7 +739,7 @@ greatest undermatch rates?
 questions that warrant further exploration. What factors drive undermatch 
 differences across student subgroups and high schools? To what extent is 
 undermatching concentrated among first-time college-goers? To what extent is
-undermatching driven by studentsâ€™ proximity to 2-year versus 4-year 
+undermatching driven by students’ proximity to 2-year versus 4-year 
 institutions? What college aspirations do incoming ninth graders hold, and do 
 these aspirations change by the time they enter or complete 12th grade? To 
 what extent are teachers, counselors, and administrators supported to work with
@@ -853,7 +868,7 @@ ggplot(chartData, aes(x = reorder(label, total_count), y = measure,
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D5plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D5plot-1.png" title="plot of chunk D5plot" alt="plot of chunk D5plot" style="display: block; margin: auto;" />
 
 ### Gaps in Rates of College Enrollment Between Latino and White Graduates
 
@@ -901,7 +916,7 @@ to college for Latino students?
 
 **Analytic Technique:** Calculate the difference between the proportion of Black 
 (or Latino) high school graduates and the proportion of White high school 
-graduates who enrolled in collegeâ€”in raw terms and after accounting for 8th 
+graduates who enrolled in college—in raw terms and after accounting for 8th 
 grade test scores, for eligibility for Free or Reduced Price Lunch (FRPL), 
 and for both of these characteristics. 
 
@@ -1011,7 +1026,7 @@ ggplot(chartData[chartData$term == "race_ethnicityHispanic", ],
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D6plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D6plot-1.png" title="plot of chunk D6plot" alt="plot of chunk D6plot" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartile Bubbles
 
@@ -1049,7 +1064,7 @@ with similar prior achievement)?
 - What is the difference between the high schools with the lowest and with the 
 highest rates in each quartile?
 - Are across-school differences in colleges enrollment rates particularly large 
-for students of certain achievement profileâ€”for example, for students with 8th 
+for students of certain achievement profile—for example, for students with 8th 
 grade test scores in the bottom quartile? 
 
 **Analytic Technique:** Calculate the share of students in each 8th grade test 
@@ -1105,18 +1120,18 @@ ggplot(chartData, aes(x = factor(qrt_8_math), y = pct_enrl)) +
         caption = figureCaption)
 ```
 
-<img src="../figure/D_D7plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D7plot-1.png" title="plot of chunk D7plot" alt="plot of chunk D7plot" style="display: block; margin: auto;" />
 
 ### Undermatch Rates Among Highly Qualified High School Graduates
 
 **Purpose:** This Strategic Performance Indicator examines the prevalence of
-"undermatch" in the agencyâ€”that is, the extent to which high school graduates 
+"undermatch" in the agency—that is, the extent to which high school graduates 
 with strong academic records pursue enrollment in colleges and universities 
 less selective than those for which they are likely qualified. The SPI does so 
 by illustrating the rates at which highly qualified graduates are enrolling at 
 2-year colleges, less competitive 4-year colleges, or forgoing college 
 altogether, instead of pursuing selective colleges that may provide a better 
-academic and social fit for these studentsâ€™ potential, ambition, and preparation.
+academic and social fit for these students’ potential, ambition, and preparation.
 
 **Required Analysis File Variables:**
 
@@ -1146,18 +1161,18 @@ and other certificates).
 **A Note on College Selectivity**
 
 To determine the selectivity of the postsecondary institutions in which high 
-school graduates enroll, we typically rely on Barronâ€™s College Rankings. Barronâ€™s 
+school graduates enroll, we typically rely on Barron’s College Rankings. Barron’s 
 has developed well-established college selectivity ratings based on the degree 
 of admissions competitiveness at four-year colleges and universities. Factors 
 used in determining these rankings include the median SAT and ACT scores, high 
 school class rankings, and grade point average among incoming college freshmen. 
-The seven selectivity rankings Barronâ€™s assigns are "Most Competitive", 
+The seven selectivity rankings Barron’s assigns are "Most Competitive", 
 "Highly Competitive," "Very Competitive," "Competitive," "Less Competitive,"
 "Non-Competitive," and "Special." As part of this exercise, we have provided 
 a simplified table from which the selectivity ratings of the colleges and 
 universities included in this dataset can be obtained. In conducting this 
 analysis for your own agency, you need to select a source of college 
-selectivity ratings, such as Barronâ€™s, and use it in place of the college 
+selectivity ratings, such as Barron’s, and use it in place of the college 
 selectivity table used in this exercise.
 
 **Ask Yourself**
@@ -1168,7 +1183,7 @@ with similar prior achievement)?
 - What is the difference between the high schools with the lowest and with the 
 highest rates in each quartile?
 - Are across-school differences in colleges enrollment rates particularly large 
-for students of certain achievement profileâ€”for example, for students with 8th grade test scores in the bottom quartile?
+for students of certain achievement profile—for example, for students with 8th grade test scores in the bottom quartile?
 
 
 ```r
@@ -1188,8 +1203,8 @@ plotdf <- cgdata %>% filter(chrt_grad >= chrt_grad_begin &
 ```r
 # // Step 4. Create the undermatch outcomes
 # This script assumes that there are 5 levels of selectivity, as in 
-# Barronâ€™s College Rankingsâ€”Most Competitive (1), Highly Competitive (2), 
-# Very Competitive (3), Competitive (4), Least Competitive (5)â€”as well as a 
+# Barron’s College Rankings—Most Competitive (1), Highly Competitive (2), 
+# Very Competitive (3), Competitive (4), Least Competitive (5)—as well as a 
 # category for colleges without assigned selectivity (assumed to be not 
 # competitive).
 
@@ -1232,6 +1247,6 @@ ggplot(arrange(chartData, -count),
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D8plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/D_D8plot-1.png" title="plot of chunk D8plot" alt="plot of chunk D8plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

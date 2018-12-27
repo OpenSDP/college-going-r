@@ -1,5 +1,20 @@
-Jared Knowles, Lauren Dahlin  
-April 7, 2017  
+---
+name: "OpenSDP College-Going Analyses in R"
+author: "Jared Knowles, Lauren Dahlin"
+date: "April 7, 2017"
+output: 
+  html_document:
+    theme: simplex
+    css: styles.css
+    highlight: NULL
+    keep_md: true
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    includes:
+      in_header: zz-sdp_ga.html
+---
 
 # College Persistence
 *College-Going Pathways*
@@ -15,6 +30,12 @@ April 7, 2017
 </div>
 </div>
 
+### Objective
+ 
+In this guide you will be able to visualize the share of students who enroll and then
+persist into a second year of college based on high school, college type, and
+top-enrolling colleges.
+
 ### Using this Guide
 
 The College-Going Pathways series is a set of guides, code, and sample data about
@@ -23,10 +44,10 @@ ideas about ways to investigate student pathways through high school and
 college. Each guide includes several analyses in the form of charts together with Stata 
 analysis and graphing code to generate each chart.
 
-Once youâ€™ve identified analyses that you want to try to replicate or modify, click the 
+Once you’ve identified analyses that you want to try to replicate or modify, click the 
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
-you're familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire 
+you're familiar with Github, you can click “Go to Repository” and clone the entire 
 College-Going Pathways repository to your own computer. Go to the Participate page to read 
 about more ways to engage with the OpenSDP community.
 
@@ -127,6 +148,12 @@ However, if you have data for more than three cohorts, you may decide to not
 average data out for fear of losing information about trends and recent changes 
 in your agency.
 
+### Giving Feedback on this Guide
+ 
+This guide is an open-source document hosted on Github and generated using the Stata
+Webdoc package. We welcome feedback, corrections, additions, and updates. Please
+visit the OpenSDP college-going pathways repository to read our contributor guidelines.
+
 ## Analyses
 
 ### Persistence Rates to the Second Year of College by High School
@@ -168,7 +195,7 @@ enrollers at 4-year colleges? Given another year of sample data, how does
 college persistence for seamless enrollers compare to delayed enrollers?
 
 **Possible Next Steps or Action Plans:** Consider establishing MOUs with local 
-community colleges to obtain detailed data on graduatesâ€™ postsecondary pursuits 
+community colleges to obtain detailed data on graduates’ postsecondary pursuits 
 at two-year colleges (Course enrollment and transcript data) allowing agencies 
 to explore persistence rates by assignment to remediation coursework.
 
@@ -268,7 +295,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, -order),
        caption = figureCaption)
 ```
 
-<img src="../figure/E_E1plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/E_E1plot-1.png" title="plot of chunk E1plot" alt="plot of chunk E1plot" style="display: block; margin: auto;" />
 
 ### Persistence Across Two-Year and Four-Year Colleges
 
@@ -315,7 +342,7 @@ students
 for administrators and college counselors to communicate which postsecondary
 institutions are associated with greater rates of persistence. Additionally, 
 conduct similar analyses that include more detailed institutional information
-that may be associated with studentsâ€™ prospects of persisting (e.g. cost of 
+that may be associated with students’ prospects of persisting (e.g. cost of 
 tuition and room/board, financial aid, etc.).
 
 **Analytic Technique:** Calculate the proportion of 4-yr college-goers who 
@@ -435,7 +462,7 @@ grid.arrange(grobs= list(p2, p1), nrow=1,
              top = "College Persistence by High School")
 ```
 
-<img src="../figure/E_E2plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/E_E2plot-1.png" title="plot of chunk E2plot" alt="plot of chunk E2plot" style="display: block; margin: auto;" />
 
 ### Top-Enrolling Colleges/Universities of Agency Graduates
 
@@ -543,36 +570,38 @@ chart2year <- bind_rows(plotdf %>% group_by(first_college_name_2yr) %>%
 chart4year %>% arrange(-enrolled) %>% 
   select(first_college_name_4yr, enrolled, perEnroll, persisted, perPersist) %>%
   head(num_inst) %>%
-    kable(., col.names = c("Name", "Number Enrolled", 
+    knitr::kable(., col.names = c("Name", "Number Enrolled", 
                          "% Enrolled", "Number Persisted", 
                          "% Persisted"))
 ```
 
 
 
-Name                                   Number Enrolled   % Enrolled   Number Persisted   % Persisted
-------------------------------------  ----------------  -----------  -----------------  ------------
-All 4-Year Colleges                               2162        100.0               2696         124.7
-University of North Carolina at ...                955         44.2               1172         122.7
-The University of Tampa                            442         20.4                573         129.6
-Pennsylvania State University-Wo...                318         14.7                410         128.9
-Kenyon College                                     121          5.6                144         119.0
+|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
+|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
+|All 4-Year Colleges                 |             233|      100.0|             2269|       973.8|
+|University of South Carolina-Ups... |              51|       21.9|              535|      1049.0|
+|University of Portland              |              47|       20.2|              382|       812.8|
+|Louisiana State University-Alexa... |              29|       12.4|              249|       858.6|
+|Notre Dame College                  |              22|        9.4|              217|       986.4|
 
 ```r
 chart2year %>% arrange(-enrolled) %>% 
   select(first_college_name_2yr, enrolled, perEnroll, persisted, perPersist) %>%
   head(num_inst) %>%
-  kable(., col.names = c("Name", "Number Enrolled", 
+  knitr::kable(., col.names = c("Name", "Number Enrolled", 
                          "% Enrolled", "Number Persisted", 
                          "% Persisted"))
 ```
 
 
 
-Name                                   Number Enrolled   % Enrolled   Number Persisted   % Persisted
-------------------------------------  ----------------  -----------  -----------------  ------------
-All 2-Year Colleges                               5417        100.0               6647         122.7
-Mt San Jacinto Community College...                925         17.1               1125         121.6
-Owens Community College                            921         17.0               1098         119.2
-Cape Fear Community College                        580         10.7                729         125.7
-Bristol Community College                          576         10.6                706         122.6
+|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
+|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
+|All 2-Year Colleges                 |             631|      100.0|             5831|       924.1|
+|Keiser University-Ft Lauderdale     |             168|       26.6|             1723|      1025.6|
+|Asheville-Buncombe Technical Com... |              91|       14.4|              693|       761.5|
+|Cochise College                     |              55|        8.7|              444|       807.3|
+|Atlanta Metropolitan State College  |              38|        6.0|              343|       902.6|
+
+#### *This guide was originally created by the Strategic Data Project.*

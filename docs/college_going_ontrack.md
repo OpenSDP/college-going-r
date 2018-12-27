@@ -1,5 +1,20 @@
-Jared Knowles, Lauren Dahlin  
-April 7, 2017  
+---
+name: "OpenSDP College-Going Analyses in R"
+author: "Jared Knowles, Lauren Dahlin"
+date: "April 7, 2017"
+output: 
+  html_document:
+    theme: simplex
+    css: styles.css
+    highlight: NULL
+    keep_md: true
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    includes:
+      in_header: zz-sdp_ga.html
+---
 
 # On-Track in Ninth Grade
 *College-Going Pathways*
@@ -30,10 +45,10 @@ ideas about ways to investigate student pathways through high school and
 college. Each guide includes several analyses in the form of charts together with Stata 
 analysis and graphing code to generate each chart.
 
-Once youâ€™ve identified analyses that you want to try to replicate or modify, click the 
+Once you’ve identified analyses that you want to try to replicate or modify, click the 
 "Download" buttons to download Stata code and sample data. You can make changes to the 
 charts using the code and sample data, or modify the code to work with your own data. If 
-you're familiar with Github, you can click â€œGo to Repositoryâ€ and clone the entire 
+you're familiar with Github, you can click “Go to Repository” and clone the entire 
 College-Going Pathways repository to your own computer. Go to the Participate page to read 
 about more ways to engage with the OpenSDP community.
 
@@ -96,7 +111,7 @@ your code.
 # Agency name
 agency_name <- "Agency"
 
-# Ninth grade cohorts you can oâ˜ºbserve persisting to the second year of college
+# Ninth grade cohorts you can o☺bserve persisting to the second year of college
 chrt_ninth_begin_persist_yr2 = 2004
 chrt_ninth_end_persist_yr2 = 2006
 
@@ -196,7 +211,7 @@ plotdf$second_year_persisters = as.numeric(plotdf$enrl_1oct_ninth_yr1_any == 1 &
                                              plotdf$enrl_1oct_ninth_yr2_any == 1 &
                                              plotdf$ontime_grad == 1)
 
-# Step 3: Generate on track indicators that take into account studentsâ€™ GPAs 
+# Step 3: Generate on track indicators that take into account students’ GPAs 
 # upon completion of their first year in high school
 
 plotdf$ot <- NA
@@ -258,7 +273,7 @@ ggplot(progressBars, aes(x = reorder(first_hs_name, n/count),
        caption = figureCaption)
 ```
 
-<img src="../figure/B_B1plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/B_B1plot-1.png" title="plot of chunk B1plot" alt="plot of chunk B1plot" style="display: block; margin: auto;" />
 
 ### Ninth To Tenth Grade Transition by On-Track Status
 
@@ -318,7 +333,7 @@ plotdf$second_year_persisters = as.numeric(plotdf$enrl_1oct_ninth_yr1_any == 1 &
                                              plotdf$enrl_1oct_ninth_yr2_any == 1 &
                                              plotdf$ontime_grad == 1)
 
-# Step 3: Generate on track indicators that take into account studentsâ€™ GPAs 
+# Step 3: Generate on track indicators that take into account students’ GPAs 
 # upon completion of their first year in high school
 
 plotdf$ot <- NA
@@ -382,6 +397,6 @@ ggplot(onTrackBar, aes(x = reorder(ot, n/count),
        caption = figureCaption)
 ```
 
-<img src="../figure/B_B2plot-1.png" style="display: block; margin: auto;" />
+<img src="../figure/B_B2plot-1.png" title="plot of chunk B2plot" alt="plot of chunk B2plot" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*
