@@ -295,7 +295,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, -order),
        caption = figureCaption)
 ```
 
-<img src="../figure/E_E1plot-1.png" title="plot of chunk E1plot" alt="plot of chunk E1plot" style="display: block; margin: auto;" />
+<img src="../figure/E_E1plot-1.png" style="display: block; margin: auto;" />
 
 ### Persistence Across Two-Year and Four-Year Colleges
 
@@ -462,7 +462,7 @@ grid.arrange(grobs= list(p2, p1), nrow=1,
              top = "College Persistence by High School")
 ```
 
-<img src="../figure/E_E2plot-1.png" title="plot of chunk E2plot" alt="plot of chunk E2plot" style="display: block; margin: auto;" />
+<img src="../figure/E_E2plot-1.png" style="display: block; margin: auto;" />
 
 ### Top-Enrolling Colleges/Universities of Agency Graduates
 
@@ -577,13 +577,13 @@ chart4year %>% arrange(-enrolled) %>%
 
 
 
-|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
-|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
-|All 4-Year Colleges                 |             233|      100.0|             2269|       973.8|
-|University of South Carolina-Ups... |              51|       21.9|              535|      1049.0|
-|University of Portland              |              47|       20.2|              382|       812.8|
-|Louisiana State University-Alexa... |              29|       12.4|              249|       858.6|
-|Notre Dame College                  |              22|        9.4|              217|       986.4|
+Name                                   Number Enrolled   % Enrolled   Number Persisted   % Persisted
+------------------------------------  ----------------  -----------  -----------------  ------------
+All 4-Year Colleges                                233        100.0               2269         973.8
+University of South Carolina-Ups...                 51         21.9                535        1049.0
+University of Portland                              47         20.2                382         812.8
+Louisiana State University-Alexa...                 29         12.4                249         858.6
+Notre Dame College                                  22          9.4                217         986.4
 
 ```r
 chart2year %>% arrange(-enrolled) %>% 
@@ -596,12 +596,12 @@ chart2year %>% arrange(-enrolled) %>%
 
 
 
-|Name                                | Number Enrolled| % Enrolled| Number Persisted| % Persisted|
-|:-----------------------------------|---------------:|----------:|----------------:|-----------:|
-|All 2-Year Colleges                 |             631|      100.0|             5831|       924.1|
-|Keiser University-Ft Lauderdale     |             168|       26.6|             1723|      1025.6|
-|Asheville-Buncombe Technical Com... |              91|       14.4|              693|       761.5|
-|Cochise College                     |              55|        8.7|              444|       807.3|
-|Atlanta Metropolitan State College  |              38|        6.0|              343|       902.6|
+Name                                   Number Enrolled   % Enrolled   Number Persisted   % Persisted
+------------------------------------  ----------------  -----------  -----------------  ------------
+All 2-Year Colleges                                631        100.0               5831         924.1
+Keiser University-Ft Lauderdale                    168         26.6               1723        1025.6
+Asheville-Buncombe Technical Com...                 91         14.4                693         761.5
+Cochise College                                     55          8.7                444         807.3
+Atlanta Metropolitan State College                  38          6.0                343         902.6
 
 #### *This guide was originally created by the Strategic Data Project.*

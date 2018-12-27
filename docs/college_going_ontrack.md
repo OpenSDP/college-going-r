@@ -273,7 +273,7 @@ ggplot(progressBars, aes(x = reorder(first_hs_name, n/count),
        caption = figureCaption)
 ```
 
-<img src="../figure/B_B1plot-1.png" title="plot of chunk B1plot" alt="plot of chunk B1plot" style="display: block; margin: auto;" />
+<img src="../figure/B_B1plot-1.png" style="display: block; margin: auto;" />
 
 ### Ninth To Tenth Grade Transition by On-Track Status
 
@@ -397,6 +397,6 @@ ggplot(onTrackBar, aes(x = reorder(ot, n/count),
        caption = figureCaption)
 ```
 
-<img src="../figure/B_B2plot-1.png" title="plot of chunk B2plot" alt="plot of chunk B2plot" style="display: block; margin: auto;" />
+<img src="../figure/B_B2plot-1.png" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

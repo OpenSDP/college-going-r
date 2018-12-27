@@ -293,7 +293,7 @@ ggplot(schoolData[schoolData$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A1graph-1.png" title="plot of chunk A1graph" alt="plot of chunk A1graph" style="display: block; margin: auto;" />
+<img src="../figure/A_A1graph-1.png" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity
 
@@ -397,7 +397,7 @@ ggplot(progressRace[progressRace$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A2plot-1.png" title="plot of chunk A2plot" alt="plot of chunk A2plot" style="display: block; margin: auto;" />
+<img src="../figure/A_A2plot-1.png" style="display: block; margin: auto;" />
 
 ### Progression by Student Race/Ethnicity, Among FRPL Students
 
@@ -520,7 +520,7 @@ ggplot(progressRaceFRL[progressRaceFRL$subset,],
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A3plot-1.png" title="plot of chunk A3plot" alt="plot of chunk A3plot" style="display: block; margin: auto;" />
+<img src="../figure/A_A3plot-1.png" style="display: block; margin: auto;" />
 
 ### Progression by Students' On-Track Status After Ninth Grade
 
@@ -660,6 +660,6 @@ ggplot(progressTrack,
        caption = figureCaption)
 ```
 
-<img src="../figure/A_A4plot-1.png" title="plot of chunk A4plot" alt="plot of chunk A4plot" style="display: block; margin: auto;" />
+<img src="../figure/A_A4plot-1.png" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

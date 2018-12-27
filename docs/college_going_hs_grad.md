@@ -249,7 +249,7 @@ ggplot(schoolLevel, aes(x = reorder(first_hs_name, measure), y = measure,
        caption = figureCaption)
 ```
 
-<img src="../figure/C_C1plot-1.png" title="plot of chunk C1plot" alt="plot of chunk C1plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C1plot-1.png" style="display: block; margin: auto;" />
 
 ### High School Completion Rates by Average 8th Grade Achievement
 
@@ -377,7 +377,7 @@ ggplot(schoolLevel[schoolLevel$first_hs_name != "Agency AVERAGE", ],
        caption = figureCaption)
 ```
 
-<img src="../figure/C_C2plot-1.png" title="plot of chunk C2plot" alt="plot of chunk C2plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C2plot-1.png" style="display: block; margin: auto;" />
 
 ### High School Completion Rates by 8th Grade Achievement Quartiles
 
@@ -529,7 +529,7 @@ grid.arrange(grobs=wrap, nrow=1,
       gp=gpar(fontsize=10,lineheight=1), just = 1, x = unit(0.99, "npc")))
 ```
 
-<img src="../figure/C_C3plot-1.png" title="plot of chunk C3plot" alt="plot of chunk C3plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C3plot-1.png" style="display: block; margin: auto;" />
 
 ### Racial Gaps in Completion Overall and by 8th Grade Achievement Quartiles
 
@@ -634,7 +634,7 @@ ggplot(plotOne, aes( x= reorder(race, -N), y = ontimeGrad, fill = race)) +
        caption = figureCaption)
 ```
 
-<img src="../figure/C_C4plot-1.png" title="plot of chunk C4plot" alt="plot of chunk C4plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C4plot-1.png" style="display: block; margin: auto;" />
 
 ```r
 ggplot(plotTwo, aes( x = qrt_label, 
@@ -653,7 +653,7 @@ ggplot(plotTwo, aes( x = qrt_label,
        caption = figureCaption)
 ```
 
-<img src="../figure/C_C4plot-2.png" title="plot of chunk C4plot" alt="plot of chunk C4plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C4plot-2.png" style="display: block; margin: auto;" />
 
 ### Enrollment Outcome in Year Four By On-Track Status At the End of Ninth Grade
 
@@ -762,6 +762,6 @@ ggplot(plotOne, aes(x = ontrackStatus, y = count/sum, fill = statusVar,
                           axis.text = element_text(color = "black")) 
 ```
 
-<img src="../figure/C_C5plot-1.png" title="plot of chunk C5plot" alt="plot of chunk C5plot" style="display: block; margin: auto;" />
+<img src="../figure/C_C5plot-1.png" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*

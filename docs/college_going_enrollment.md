@@ -267,7 +267,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
         legend.position = c(0.15, 0.8), axis.ticks.x = element_blank())
 ```
 
-<img src="../figure/D_D1plot-1.png" title="plot of chunk D1plot" alt="plot of chunk D1plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D1plot-1.png" style="display: block; margin: auto;" />
 
 ### Seamless and Delayed College Enrollment Rates by High School
 
@@ -400,7 +400,7 @@ ggplot(chartData, aes(x = reorder(last_hs_name, enroll_any),
         legend.position = c(0.1, 0.8), axis.ticks.x = element_blank())
 ```
 
-<img src="../figure/D_D2Plot-1.png" title="plot of chunk D2Plot" alt="plot of chunk D2Plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D2Plot-1.png" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by Average 8th Grade Achievement
 
@@ -520,7 +520,7 @@ ggplot(chartData, aes(x = math_test, y = enroll_rate)) +
   theme(axis.text = element_text(color="black", size = 12))
 ```
 
-<img src="../figure/D_D3plot-1.png" title="plot of chunk D3plot" alt="plot of chunk D3plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D3plot-1.png" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartiles
 
@@ -687,7 +687,7 @@ grid.arrange(grobs=wrap, nrow=1,
                x = unit(0.99, "npc")))
 ```
 
-<img src="../figure/D_D4plot-1.png" title="plot of chunk D4plot" alt="plot of chunk D4plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D4plot-1.png" style="display: block; margin: auto;" />
 
 ### Rates of College Enrollment by College Type Among Highly Qualified Graduates
 
@@ -868,7 +868,7 @@ ggplot(chartData, aes(x = reorder(label, total_count), y = measure,
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D5plot-1.png" title="plot of chunk D5plot" alt="plot of chunk D5plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D5plot-1.png" style="display: block; margin: auto;" />
 
 ### Gaps in Rates of College Enrollment Between Latino and White Graduates
 
@@ -1026,7 +1026,7 @@ ggplot(chartData[chartData$term == "race_ethnicityHispanic", ],
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D6plot-1.png" title="plot of chunk D6plot" alt="plot of chunk D6plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D6plot-1.png" style="display: block; margin: auto;" />
 
 ### College Enrollment Rates by 8th Grade Achievement Quartile Bubbles
 
@@ -1120,7 +1120,7 @@ ggplot(chartData, aes(x = factor(qrt_8_math), y = pct_enrl)) +
         caption = figureCaption)
 ```
 
-<img src="../figure/D_D7plot-1.png" title="plot of chunk D7plot" alt="plot of chunk D7plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D7plot-1.png" style="display: block; margin: auto;" />
 
 ### Undermatch Rates Among Highly Qualified High School Graduates
 
@@ -1247,6 +1247,6 @@ ggplot(arrange(chartData, -count),
        caption = figureCaption)
 ```
 
-<img src="../figure/D_D8plot-1.png" title="plot of chunk D8plot" alt="plot of chunk D8plot" style="display: block; margin: auto;" />
+<img src="../figure/D_D8plot-1.png" style="display: block; margin: auto;" />
 
 #### *This guide was originally created by the Strategic Data Project.*
