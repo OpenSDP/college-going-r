@@ -8,6 +8,15 @@
 		position: fixed;
     }
 }
+
+a {
+  color: #A51C30;
+}
+
+a:focus, a:hover {
+  color: #6D121F;
+}
+
 #toc {
 	width: 100%;
 	text-align: left;
@@ -15,7 +24,7 @@
 	overflow-y: scroll;
 }
 #logo{
-	 background-color: #C4112F;
+	 background-color: #A51C30;
 }
 body { 
 	padding-top: 115px; 
